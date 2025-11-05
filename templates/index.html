@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block title %}AI人工智能平台 - 首页{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">赋能未来，AI驱动创新，orange</h1>
+                <p class="lead mb-4">提供企业级人工智能解决方案，助力您的业务智能化转型。从数据处理到模型部署，我们提供一站式AI服务。</p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="/pricing" class="btn btn-light btn-lg px-4 py-2">免费试用</a>
+                    <a href="/contact" class="btn btn-outline-light btn-lg px-4 py-2">了解详情</a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <i class="fas fa-robot" style="font-size: 15rem; opacity: 0.8;"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 特性介绍 -->
+<section class="container mb-5">
+    <div class="row text-center mb-5">
+        <div class="col">
+            <h2 class="fw-bold">为什么选择我们的AI平台</h2>
+            <p class="text-muted">我们提供全面、易用且强大的AI解决方案</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="text-center">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h4>智能分析</h4>
+                <p class="text-muted">利用先进的机器学习算法，从数据中提取有价值的洞察，助力决策制定。</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="text-center">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h4>快速部署</h4>
+                <p class="text-muted">简化模型部署流程，几分钟内即可将AI模型集成到您的应用中。</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="text-center">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h4>安全可靠</h4>
+                <p class="text-muted">企业级安全标准，确保您的数据和模型安全无虞。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 客户评价 -->
+<section class="bg-light py-5">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col">
+                <h2 class="fw-bold">客户评价</h2>
+                <p class="text-muted">听听我们的客户怎么说</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="card-text">"这个AI平台彻底改变了我们的数据分析方式。准确率高，响应速度快，强烈推荐！"</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div>
+                                <h6 class="mb-0">张明</h6>
+                                <small class="text-muted">科技公司CTO</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="card-text">"部署过程非常简单，API文档清晰易懂。我们的开发团队在几天内就完成了集成。"</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div>
+                                <h6 class="mb-0">李华</h6>
+                                <small class="text-muted">电商平台技术主管</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                            <i class="fas fa-star text-warning"></i>
+                        </div>
+                        <p class="card-text">"客户支持非常出色，帮助我们解决了几个复杂的数据处理问题。服务体验一流！"</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div>
+                                <h6 class="mb-0">王芳</h6>
+                                <small class="text-muted">金融公司数据科学家</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h2 class="fw-bold mb-3">准备好开始您的AI之旅了吗？</h2>
+                <p class="lead mb-4">立即注册，体验强大的AI平台功能</p>
+                <a href="/pricing" class="btn btn-primary btn-lg px-5">免费试用</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

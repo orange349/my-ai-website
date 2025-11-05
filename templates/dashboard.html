@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+
+{% block title %}AI人工智能平台 - 仪表盘{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 fw-bold">AI平台仪表盘</h1>
+        <div class="dropdown">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                <i class="fas fa-cog me-1"></i>设置
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">刷新数据</a></li>
+                <li><a class="dropdown-item" href="#">导出报告</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">通知设置</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 指标卡片 -->
+    <div class="row mb-4">
+        <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="metric-card">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <p class="text-muted mb-1">模型准确率</p>
+                        <h3 class="metric-value">{{ metrics.model_accuracy }}%</h3>
+                    </div>
+                    <div class="bg-primary bg-opacity-10 p-2 rounded">
+                        <i class="fas fa-chart-line text-primary"></i>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <small class="text-success"><i class="fas fa-caret-up me-1"></i>2.5% 提升</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="metric-card">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <p class="text-muted mb-1">响应时间</p>
+                        <h3 class="metric-value">{{ metrics.response_time }}ms</h3>
+                    </div>
+                    <div class="bg-success bg-opacity-10 p-2 rounded">
+                        <i class="fas fa-tachometer-alt text-success"></i>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <small class="text-success"><i class="fas fa-caret-down me-1"></i>15ms 优化</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="metric-card">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <p class="text-muted mb-1">活跃用户</p>
+                        <h3 class="metric-value">{{ metrics.active_users }}</h3>
+                    </div>
+                    <div class="bg-info bg-opacity-10 p-2 rounded">
+                        <i class="fas fa-users text-info"></i>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <small class="text-success"><i class="fas fa-caret-up me-1"></i>12% 增长</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="metric-card">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <p class="text-muted mb-1">数据处理量</p>
+                        <h3 class="metric-value">{{ metrics.data_processed }}</h3>
+                    </div>
+                    <div class="bg-warning bg-opacity-10 p-2 rounded">
+                        <i class="fas fa-database text-warning"></i>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <small class="text-success"><i class="fas fa-caret-up me-1"></i>8% 增长</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-md-4 col-sm-6">
+            <div class="metric-card">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <p class="text-muted mb-1">系统状态</p>
+                        <h3 class="metric-value text-success">{{ metrics.system_status }}</h3>
+                    </div>
+                    <div class="bg-success bg-opacity-10 p-2 rounded">
+                        <i class="fas fa-check-circle text-success"></i>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <small class="text-muted">正常运行时间 {{ metrics.uptime }}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 图表区域 -->
+    <div class="row">
+        <div class="col-lg-8 mb-4">
+            <div class="metric-card">
+                <div id="performance-chart"></div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="metric-card">
+                <div id="usage-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 最近活动 -->
+    <div class="row">
+        <div class="col-12">
+            <div class="metric-card">
+                <h5 class="fw-bold mb-3">最近活动</h5>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>时间</th>
+                                <th>用户</th>
+                                <th>操作</th>
+                                <th>状态</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>刚刚</td>
+                                <td>user@example.com</td>
+                                <td>模型训练完成</td>
+                                <td><span class="badge bg-success">成功</span></td>
+                            </tr>
+                            <tr>
+                                <td>5分钟前</td>
+                                <td>admin@company.com</td>
+                                <td>数据导入</td>
+                                <td><span class="badge bg-success">成功</span></td>
+                            </tr>
+                            <tr>
+                                <td>15分钟前</td>
+                                <td>analyst@example.com</td>
+                                <td>预测分析任务</td>
+                                <td><span class="badge bg-warning">进行中</span></td>
+                            </tr>
+                            <tr>
+                                <td>30分钟前</td>
+                                <td>dev@company.com</td>
+                                <td>API调用</td>
+                                <td><span class="badge bg-success">成功</span></td>
+                            </tr>
+                            <tr>
+                                <td>1小时前</td>
+                                <td>user@example.com</td>
+                                <td>模型部署</td>
+                                <td><span class="badge bg-success">成功</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // 渲染性能图表
+    var perfChartData = {{ perf_chart | safe }};
+    Plotly.newPlot('performance-chart', perfChartData.data, perfChartData.layout, {responsive: true});
+
+    // 渲染使用情况图表
+    var usageChartData = {{ usage_chart | safe }};
+    Plotly.newPlot('usage-chart', usageChartData.data, usageChartData.layout, {responsive: true});
+
+    // 实时更新指标数据
+    function updateMetrics() {
+        fetch('/api/real-time-metrics')
+            .then(response => response.json())
+            .then(data => {
+                // 在实际应用中，这里会更新页面上的指标数据
+                console.log('实时指标更新:', data);
+            });
+    }
+
+    // 每30秒更新一次指标
+    setInterval(updateMetrics, 30000);
+</script>
+{% endblock %}
