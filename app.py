@@ -6,9 +6,20 @@ import json
 import pandas as pd
 import random
 from datetime import datetime, timedelta
+from flask_mail import Mail, Message
+import os
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your-secret-key-here'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your-secret-key-here')
+
+# 邮件配置
+app.config['MAIL_SERVER'] = 'smtp.qq.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+
+mail = Mail(app)
 
 
 # 模拟数据生成函数
@@ -58,22 +69,17 @@ def index():
 @app.route('/dashboard')
 def dashboard():
     """仪表盘页面"""
-    # 生成指标数据
     metrics = generate_metrics_data()
 
-    # 生成性能图表
     perf_df = generate_performance_data()
     perf_fig = px.line(perf_df, x='Date', y=['准确率', '响应时间(ms)'],
-                       title='AI模型性能趋势',
-                       labels={'value': '数值', 'variable': '指标'})
+                       title='AI模型性能趋势')
     perf_fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)')
     perf_chart = json.dumps(perf_fig, cls=plotly.utils.PlotlyJSONEncoder)
 
-    # 生成使用情况图表
     usage_df = generate_usage_data()
     usage_fig = px.bar(usage_df, x='功能', y='使用次数',
-                       title='功能使用情况', color='使用次数',
-                       color_continuous_scale='Blues')
+                       title='功能使用情况', color='使用次数')
     usage_fig.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)')
     usage_chart = json.dumps(usage_fig, cls=plotly.utils.PlotlyJSONEncoder)
 
@@ -116,12 +122,36 @@ def pricing():
 def contact():
     """联系页面"""
     if request.method == 'POST':
-        # 这里处理表单提交
         name = request.form.get('name')
         email = request.form.get('email')
+        subject = request.form.get('subject')
         message = request.form.get('message')
-        # 在实际应用中，这里应该保存到数据库或发送邮件
-        return render_template('contact.html', success=True)
+
+        # 发送邮件通知
+        try:
+            msg = Message(
+                subject=f"AI网站联系表单 - {subject}",
+                sender=app.config['MAIL_USERNAME'],
+                recipients=[app.config['MAIL_USERNAME']],
+                body=f"""
+                新的联系表单提交：
+
+                姓名: {name}
+                邮箱: {email}
+                主题: {subject}
+                消息: 
+                {message}
+
+                请及时回复！
+                """
+            )
+            mail.send(msg)
+            success = True
+        except Exception as e:
+            print(f"邮件发送失败: {e}")
+            success = False
+
+        return render_template('contact.html', success=success)
 
     return render_template('contact.html', success=False)
 
@@ -134,4 +164,5 @@ def real_time_metrics():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
